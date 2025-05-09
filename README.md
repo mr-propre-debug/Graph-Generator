@@ -1,4 +1,4 @@
-# Electric Vehicles Data Visualization Project
+# CSV Data Visualization Project
 
 This project provides a set of tools for visualizing CSV data through various types of graphs. Users can generate visual representations of data from CSV files using both a command-line interface and a graphical user interface.
 
