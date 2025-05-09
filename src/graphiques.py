@@ -34,7 +34,7 @@ def create_bar_chart(data, parent):
     y_key = keys[1]
     title, x_label, y_label = get_inputs_bar_chart(parent)
     x = [item[x_key] for item in data]
-    y = [int(item[y_key]) for item in data]
+    y = [float(item[y_key]) for item in data]
     plt.figure(figsize=(10, 6))
     plt.bar(x, y, color='skyblue', width=0.4)
     plt.title(title)
@@ -45,16 +45,18 @@ def create_bar_chart(data, parent):
     plt.tight_layout()
     plt.show()
 
-def get_inputs_pie_chart(data, parent):
-    key = simpledialog.askstring("Clé", f"Clé pour les labels (parmi {list(data[0].keys())}) :", parent=parent)
+def get_inputs_pie_chart(parent):
     title = simpledialog.askstring("Titre", "Titre du graphique :", parent=parent)
     parent.destroy()
-    return key, title
+    return title
 
 def create_pie_chart(data, parent):
-    key, title = get_inputs_pie_chart(data, parent=parent)
-    labels = [item[key] for item in data]
-    sizes = [int(item['count']) for item in data]
+    title = get_inputs_pie_chart(parent=parent)
+    keys = list(data[0].keys())
+    y_key = keys[1]
+    x_key = keys[0]
+    labels = [item[x_key] for item in data]
+    sizes = [float(item[y_key]) for item in data]
     plt.figure(figsize=(8, 8))
     plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=140)
     plt.title(title)
@@ -75,7 +77,7 @@ def create_line_chart(data, parent):
 
     title, x_label, y_label = get_inputs_line_chart(parent=parent)
     x = [item[x_key] for item in data]
-    y = [int(item[y_key]) for item in data]
+    y = [float(item[y_key]) for item in data]
 
     plt.figure(figsize=(10, 6))
     plt.plot(x, y, marker='x', color='skyblue')
@@ -99,7 +101,7 @@ def get_inputs_histogram(parent):
 
 def create_histogram(data, parent):
     key, title, x_label, y_label = get_inputs_histogram(parent=parent)
-    values = [int(item[key]) for item in data]
+    values = [float(item[key]) for item in data]
 
     plt.figure(figsize=(10, 6))
     plt.hist(values, bins=20, color='skyblue', edgecolor='black')
@@ -154,7 +156,7 @@ def get_inputs_box_plot(parent):
 
 def create_box_plot(data, parent):
     key, title, x_label, y_label = get_inputs_box_plot(parent=parent)
-    values = [int(item[key]) for item in data]
+    values = [float(item[key]) for item in data]
 
     plt.figure(figsize=(10, 6))
     plt.boxplot(values, patch_artist=True, boxprops=dict(facecolor='skyblue'))
@@ -179,7 +181,7 @@ def create_area_chart(data, parent):
     y_key = keys[1]
     title, x_label, y_label = get_inputs_area_chart(parent=parent)
     x = [item[x_key] for item in data]
-    y = [int(item[y_key]) for item in data]
+    y = [float(item[y_key]) for item in data]
 
     plt.figure(figsize=(10, 6))
     plt.fill_between(x, y, color='skyblue', alpha=0.5)
